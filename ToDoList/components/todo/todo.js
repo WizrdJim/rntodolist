@@ -12,8 +12,12 @@ export default class ToDo extends Component {
 
     showToDoList() {
         return (
-            this.state.todos.map(e => {
-                return e
+            this.state.todos.map((e, i) => {
+                return (
+                    <Text key={i}>
+                        {e}
+                    </Text>
+                )
             })
         )
     }
@@ -23,13 +27,12 @@ export default class ToDo extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.containerText}>
-                    To Do Component
+                    My To Do List
                 </Text>
 
-
-                {/* <Text>
+                {/* <View>
                     {this.showToDoList()}
-                </Text> */}
+                </View> */}
 
             </View>
         )
@@ -50,7 +53,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 0,
         textAlign: 'center'
-
     }
 })
 
