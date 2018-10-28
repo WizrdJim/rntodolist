@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, keyboardType } from 'react-native';
 import { View, Text, Button } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 
@@ -16,11 +16,22 @@ const fields = [
 export default class AddToDo extends Component {
     constructor(props) {
         super(props);
+        this.addNewToDo = this.addNewToDo.bind(this);
+
+        this.state = {
+            addNew: this.props.addItem
+        }
     }
 
-    addToDo() {
+    // state = {
+    //     addNew: props.addItem
+    // }
+
+    addNewToDo() {
         const formValues = this.formGenerator.getValues();
         console.log('FORM VALUES: ', formValues);
+        // console.log('props: ', props)
+        this.state.addNew(formValues.todo);
     }
 
     render() {
@@ -36,7 +47,7 @@ export default class AddToDo extends Component {
                 </View>
 
                 <View>
-                    <Button rounded style={styles.button}onPress={() => this.addToDo()}>
+                    <Button rounded style={styles.button} onPress={this.addNewToDo}>
                         <Text>Add</Text>
                     </Button>
                 </View>
@@ -51,7 +62,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 20
     },
-    button:{
+    button: {
         marginLeft: 20,
         backgroundColor: '#374461'
     }
