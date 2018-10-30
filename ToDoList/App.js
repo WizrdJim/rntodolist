@@ -4,9 +4,9 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 
 
 
-import Title from '../title/title';
-import ToDo from '../todo/todo';
-import AddToDo from '../form/form';
+import Title from './components/title/title';
+import ToDo from './components/todo/todo';
+import AddToDo from './components/form/form';
 
 
 export default class App extends Component {

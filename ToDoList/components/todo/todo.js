@@ -4,17 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            todos: this.props.todos
-        }
-
-        // console.log('todos: ', this.props.todos)
     }
 
-    showToDoList() {
+    showToDoList(todos) {
         return (
-            this.state.todos.map((e, i) => {
+            todos.map((e, i) => {
                 return (
                     <Text key={i} style={styles.todos}>
                         {e}
@@ -43,7 +37,7 @@ export default class ToDo extends Component {
 
 
                     <View style={{marginTop: 15}}>
-                        {this.showToDoList()}
+                        {this.showToDoList(this.props.todos)}
                     </View>
 
 

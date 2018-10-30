@@ -17,10 +17,6 @@ export default class AddToDo extends Component {
     constructor(props) {
         super(props);
         this.addNewToDo = this.addNewToDo.bind(this);
-
-        this.state = {
-            addNew: this.props.addItem
-        }
     }
 
     // state = {
@@ -31,7 +27,7 @@ export default class AddToDo extends Component {
         const formValues = this.formGenerator.getValues();
         console.log('FORM VALUES: ', formValues);
         // console.log('props: ', props)
-        this.state.addNew(formValues.todo);
+        this.props.addItem(formValues.todo);
     }
 
     render() {
