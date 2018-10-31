@@ -4,16 +4,16 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
-        // this.showToDoList = this.todoList.bind(this)
-        this.state = {
-            todos: ['Do Laundry', 'Wash Dishes']
-        }
     }
 
-    showToDoList() {
+    showToDoList(todos) {
         return (
-            this.state.todos.map(e => {
-                return e
+            todos.map((e, i) => {
+                return (
+                    <Text key={i} style={styles.todos}>
+                        {e}
+                    </Text>
+                )
             })
         )
     }
@@ -22,15 +22,26 @@ export default class ToDo extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.containerText}>
-                    To Do Component
-                </Text>
 
 
-                {/* <Text>
-                    {this.showToDoList()}
-                </Text> */}
 
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                }}>
+                    <View>
+                        <Text style={styles.containerText}>
+                            My To Do List
+                    </Text>
+                    </View>
+
+
+                    <View style={{marginTop: 15}}>
+                        {this.showToDoList(this.props.todos)}
+                    </View>
+
+
+                </View>
             </View>
         )
     }
@@ -38,7 +49,7 @@ export default class ToDo extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#9E9EA5',
+        backgroundColor: '#374461',
         marginTop: 50,
         marginRight: 10,
         marginLeft: 10,
@@ -49,8 +60,16 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         marginTop: 0,
-        textAlign: 'center'
-
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    // containerText: {
+    //     position: 'relative',
+    //     top: 10
+    // },
+    todos: {
+        color: 'white',
+        textAlign: 'center',
     }
 })
 
