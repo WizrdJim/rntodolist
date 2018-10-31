@@ -16,12 +16,11 @@ export default class AddToDo extends Component {
     }
 
     addNewToDo() {
-        console.log('My todo: ', this.state.todo)
         this.props.addItem(this.state.todo);
 
         this.setState({
             todo: ''
-        },() =>  console.log('state todo: ', this.state.todo))
+        })
     }
 
     render() {
@@ -32,6 +31,7 @@ export default class AddToDo extends Component {
                         style={styles.input}
                         placeholder="  Add to do"
                         onChangeText={(todo) => this.setState({ todo })}
+                        value={this.state.todo}
                     />
                 </View>
 

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-// import GenerateForm from 'react-native-form-builder';
-
-
 
 import Title from './components/title/title';
 import ToDo from './components/todo/todo';
@@ -65,8 +62,6 @@ export default class App extends Component {
     )
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
