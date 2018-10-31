@@ -10,44 +10,63 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.addItem = this.addItem.bind(this);
-    this.forcingUpdate = this.forcingUpdate.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
+    this.editToDo = this.editToDo.bind(this);
+    this.updateToDo = this.updateToDo.bind(this);
+    this.updatePreviousToDo = this.updatePreviousToDo.bind(this)
 
     this.state = {
-      todos: ['Do Laundry', 'Wash Dishes']
+      todos: ['Do Laundry', 'Wash Dishes'],
+      todo: '',
+      showEditButton: false,
+      index: -1
     }
   }
 
   addItem(newToDo) {
-    console.log('adding... ', newToDo);
-
     this.setState({
-      todos: [newToDo, ...this.state.todos]
-    }, () => {
-      console.log('Updated todos: ', this.state.todos)
-      this.forcingUpdate();
+      todos: [newToDo, ...this.state.todos],
+      todo: ''
     })
   }
 
-  forcingUpdate() {
-    this.forceUpdate();
+  updateToDo(todo) {
+    this.setState({ todo })
+  }
+
+  updatePreviousToDo() {
+    var toDoItems = this.state.todos;
+
+    toDoItems[this.state.index] = this.state.todo;
+
+    this.setState({
+      todos: toDoItems,
+      todo: '',
+      showEditButton: false,
+    })
   }
 
   deleteToDo(index) {
-    console.log('DELETE BUTTON CLICKED');
-    console.log(index)
-    // const todos = this.state.todos;
-    // var new_todos_list = []
+    const todos = this.state.todos;
+    var new_todos_list = []
 
-    // todos.map((item, i) => {
-    //   if (index !== i) {
-    //     new_todos_list.push(item);
-    //   }
-    // })
+    todos.map((item, i) => {
+      if (index !== i) {
+        new_todos_list.push(item);
+      }
+    })
 
-    // this.setState({
-    //   todos: new_todos_list
-    // }, () => console.log('New todos: ', this.state.todos))
+    this.setState({
+      todos: new_todos_list
+    })
+  }
+
+  editToDo(item, index) {
+    this.setState({
+      showEditButton: true,
+      todo: item,
+      index: index
+    })
   }
 
   render() {
@@ -55,9 +74,9 @@ export default class App extends Component {
       <ScrollView>
         <View style={styles.container}>
           <Title />
-          <AddToDo addItem={this.addItem} />
+          <AddToDo updatePreviousToDo={this.updatePreviousToDo} updateToDo={(todo) => this.updateToDo(todo)} addItem={this.addItem} showEditButton={this.state.showEditButton} todo={this.state.todo} />
           {/* {deleteOneTodo={this.deleteToDo}} */}
-          <ToDo todos={this.state.todos} />
+          <ToDo todos={this.state.todos} editToDo={(item, index) => this.editToDo(item, index)} deleteOneTodo={(i) => this.deleteToDo(i)} />
         </View>
       </ScrollView>
     )

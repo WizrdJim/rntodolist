@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native';
-// import { Button } from 'native-base';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
-        this.deleteToDo = this.deleteToDo.bind(this);
-        this. placeholderSubmit = this.placeholderSubmit.bind(this);
 
         this.state = {
-            deleteButtonColor: 'white'
+            deleteButtonColor: 'red',
+            editButtonColor: 'white'
         }
     }
-    componentDidMount(){
-        console.log('props: ', this.props)
-    }
 
-    placeholderSubmit(index){
-        console.log('TEMP DELETE');
-    }
 
     showToDoList(todos) {
         return (
@@ -32,20 +24,22 @@ export default class ToDo extends Component {
                                 {e}
                             </Text>
                         </View>
-                        {/* <TouchableHighlight
-                            style={styles.deleteContainer}
-                            onPress={() => this.deleteToDo(i)}
-                        >
-                            <Text> Touch Here </Text>
-                        </TouchableHighlight> */}
 
                         <View style={styles.deleteContainer}>
                             <Button
                                 onPress={() => this.props.deleteOneTodo(i)}
-                                // onPress={this.placeholderSubmit}
                                 title="X"
                                 style={styles.deleteButton}
                                 color={this.state.deleteButtonColor}
+                            />
+                        </View>
+
+                        <View style={styles.editContainer}>
+                            <Button
+                                onPress={() => this.props.editToDo(e, i)}
+                                title="Edit"
+                                style={styles.editButton}
+                                color={this.state.editButtonColor}
                             />
                         </View>
                     </View>
@@ -82,7 +76,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         height: 500,
-        borderRadius: 15
+        borderRadius: 15,
     },
     toDoHeader: {
         color: 'white',
@@ -99,28 +93,32 @@ const styles = StyleSheet.create({
     todoContainer: {
         width: 100,
         height: 50,
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
         marginTop: 15,
         justifyContent: 'center',
 
     },
     deleteContainer: {
         marginLeft: 10,
-        borderColor: 'white',
+        borderColor: 'red',
         borderWidth: 0.2,
         width: 35,
         height: 35,
-        borderColor: 'white',
         borderRadius: 10,
-        marginTop: 22,
+        marginTop: 22
     },
     toDosContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
     },
-    deletePressed: {
-
+    editContainer: {
+        marginLeft: 10,
+        borderColor: 'white',
+        borderWidth: 0.2,
+        width: 55,
+        height: 35,
+        borderRadius: 10,
+        marginTop: 22,
     }
-
 })
 

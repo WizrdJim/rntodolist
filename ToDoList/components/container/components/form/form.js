@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, TextInput, keyboardType } from 'react-native';
 import { View, Text, Button } from 'native-base';
-import GenerateForm from 'react-native-form-builder';
 
 
 
@@ -10,17 +9,10 @@ export default class AddToDo extends Component {
         super(props);
         this.addNewToDo = this.addNewToDo.bind(this);
 
-        this.state = {
-            todo: ''
-        }
     }
 
     addNewToDo() {
-        this.props.addItem(this.state.todo);
-
-        this.setState({
-            todo: ''
-        })
+        this.props.addItem(this.props.todo);
     }
 
     render() {
@@ -30,15 +22,19 @@ export default class AddToDo extends Component {
                     <TextInput
                         style={styles.input}
                         placeholder="  Add to do"
-                        onChangeText={(todo) => this.setState({ todo })}
-                        value={this.state.todo}
+                        onChangeText={(todo) => this.props.updateToDo(todo)}
+                        // onChange={(event) => this.handleInputChange(event)}
+                        value={this.props.todo}
                     />
                 </View>
 
                 <View>
-                    <Button rounded style={styles.button} onPress={this.addNewToDo}>
+                    {this.props.showEditButton ? 
+                    <Button rounded style={styles.button} onPress={this.props.updatePreviousToDo}>
+                        <Text>Update</Text>
+                    </Button>: <Button rounded style={styles.button} onPress={this.addNewToDo}>
                         <Text>Add</Text>
-                    </Button>
+                    </Button>}
                 </View>
             </View>
         )
