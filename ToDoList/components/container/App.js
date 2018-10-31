@@ -36,18 +36,18 @@ export default class App extends Component {
   deleteToDo(index) {
     console.log('DELETE BUTTON CLICKED');
     console.log(index)
-    const todos = this.state.todos;
-    var new_todos_list = []
+    // const todos = this.state.todos;
+    // var new_todos_list = []
 
-    todos.map((item, i) => {
-      if (index !== i) {
-        new_todos_list.push(item);
-      }
-    })
+    // todos.map((item, i) => {
+    //   if (index !== i) {
+    //     new_todos_list.push(item);
+    //   }
+    // })
 
-    this.setState({
-      todos: new_todos_list
-    }, () => console.log('New todos: ', this.state.todos))
+    // this.setState({
+    //   todos: new_todos_list
+    // }, () => console.log('New todos: ', this.state.todos))
   }
 
   render() {
@@ -56,7 +56,8 @@ export default class App extends Component {
         <View style={styles.container}>
           <Title />
           <AddToDo addItem={this.addItem} />
-          <ToDo todos={this.state.todos} deleteOneTodo={(i) => this.deleteToDo(i)} />
+          {/* {deleteOneTodo={this.deleteToDo}} */}
+          <ToDo todos={this.state.todos} />
         </View>
       </ScrollView>
     )

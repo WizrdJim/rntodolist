@@ -6,21 +6,21 @@ import { StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native
 export default class ToDo extends Component {
     constructor(props) {
         super(props);
-        this.deleteToDo = this.deleteToDo.bind(this)
+        this.deleteToDo = this.deleteToDo.bind(this);
+        this. placeholderSubmit = this.placeholderSubmit.bind(this);
 
         this.state = {
             deleteButtonColor: 'white'
         }
     }
-
-    deleteToDo(index) {
-        console.log('delete: ', index);
-
+    componentDidMount(){
+        console.log('props: ', this.props)
     }
 
-    // componentDidMount(){
-    //     console.log('props: ', this.props)
-    // }
+    placeholderSubmit(index){
+        console.log('TEMP DELETE');
+    }
+
     showToDoList(todos) {
         return (
             todos.map((e, i) => {
@@ -42,6 +42,7 @@ export default class ToDo extends Component {
                         <View style={styles.deleteContainer}>
                             <Button
                                 onPress={() => this.props.deleteOneTodo(i)}
+                                // onPress={this.placeholderSubmit}
                                 title="X"
                                 style={styles.deleteButton}
                                 color={this.state.deleteButtonColor}
