@@ -4,9 +4,9 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 
 
 
-import Title from '../title/title';
-import ToDo from '../todo/todo';
-import AddToDo from '../form/form';
+import Title from './components/title/title';
+import ToDo from './components/todo/todo';
+import AddToDo from './components/form/form';
 
 
 export default class App extends Component {
@@ -14,6 +14,7 @@ export default class App extends Component {
     super(props);
     this.addItem = this.addItem.bind(this);
     this.forcingUpdate = this.forcingUpdate.bind(this);
+    this.deleteToDo = this.deleteToDo.bind(this);
 
     this.state = {
       todos: ['Do Laundry', 'Wash Dishes']
@@ -35,13 +36,22 @@ export default class App extends Component {
     this.forceUpdate();
   }
 
-  // UNSAFE_componentWillUpdate(){
+  deleteToDo(index) {
+    console.log('DELETE BUTTON CLICKED');
+    console.log(index)
+    const todos = this.state.todos;
+    var new_todos_list = []
 
-  // }
+    todos.map((item, i) => {
+      if (index !== i) {
+        new_todos_list.push(item);
+      }
+    })
 
-  // shouldComponentUpdate(){
-  //   return true;
-  // }
+    this.setState({
+      todos: new_todos_list
+    }, () => console.log('New todos: ', this.state.todos))
+  }
 
   render() {
     return (
@@ -49,7 +59,7 @@ export default class App extends Component {
         <View style={styles.container}>
           <Title />
           <AddToDo addItem={this.addItem} />
-          <ToDo todos={this.state.todos} />
+          <ToDo todos={this.state.todos} deleteOneTodo={(i) => this.deleteToDo(i)} />
         </View>
       </ScrollView>
     )
