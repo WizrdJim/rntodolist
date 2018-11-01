@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
-import { StyleSheet, keyboardType } from 'react-native';
+import { StyleSheet, TextInput, keyboardType } from 'react-native';
 import { View, Text, Button } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 
-const fields = [
-    {
-        type: 'text',
-        name: 'todo',
-        required: true,
-        label: 'Adding a to do',
-    }
-];
 
 
 export default class AddToDo extends Component {
     constructor(props) {
         super(props);
         this.addNewToDo = this.addNewToDo.bind(this);
+
+        this.state = {
+            todo: ''
+        }
     }
 
-    // state = {
-    //     addNew: props.addItem
-    // }
-
     addNewToDo() {
-        const formValues = this.formGenerator.getValues();
-        console.log('FORM VALUES: ', formValues);
-        // console.log('props: ', props)
-        this.props.addItem(formValues.todo);
+        this.props.addItem(this.state.todo);
+
+        this.setState({
+            todo: ''
+        })
     }
 
     render() {
         return (
             <View>
                 <View>
-                    <GenerateForm
-                        ref={(c) => {
-                            this.formGenerator = c;
-                        }}
-                        fields={fields}
+                    <TextInput
+                        style={styles.input}
+                        placeholder="  Add to do"
+                        onChangeText={(todo) => this.setState({ todo })}
                     />
                 </View>
 
@@ -61,6 +53,16 @@ const styles = StyleSheet.create({
     button: {
         marginLeft: 20,
         backgroundColor: '#374461'
+    },
+    input: {
+        height: 40,
+        borderColor: 'black',
+        borderWidth: 0.2,
+        borderRadius: 10,
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10
     }
 })
 
